@@ -87,19 +87,21 @@ export const navVariants: Variants = {
   },
 };
 
-export const slideIn = (direction: "left" | "right" | "up" | "down", delay: number = 0): Variants => {
-  const axis = direction === "left" || direction === "right" ? "x" : "y";
-  const value = direction === "right" || direction === "down" ? 100 : -100;
-
+export const slideIn = (direction: "left" | "right" | "up" | "down", delay: number = 0) => {
   return {
-    hidden: { [axis]: value, opacity: 0 },
+    hidden: {
+      opacity: 0,
+      x: direction === "left" ? -100 : direction === "right" ? 100 : 0,
+      y: direction === "up" ? -100 : direction === "down" ? 100 : 0,
+    },
     visible: {
-      [axis]: 0,
       opacity: 1,
+      x: 0,
+      y: 0,
       transition: {
         duration: 0.7,
         delay,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        ease: [0.25, 0.46, 0.45, 0.94] as const,
       },
     },
   };

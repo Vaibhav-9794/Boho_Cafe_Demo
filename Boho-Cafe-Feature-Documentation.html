@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Boho Cafe & Lounge — Complete Feature Documentation</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  @page { 
+    size: A4; 
+    margin: 15mm 20mm;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #1a1a1a;
+    line-height: 1.7;
+    font-size: 11pt;
+    background: #fff;
+  }
+
+  /* Cover Page */
+  .cover {
+    page-break-after: always;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+    text-align: center;
+    position: relative;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #A8893D, #C6A962, #D4B978, #C6A962, #A8893D);
+  }
+  .cover-logo {
+    width: 100px; height: 100px;
+    border: 3px solid #C6A962;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 30px;
+  }
+  .cover-logo span {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px; font-weight: 700;
+    color: #C6A962;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36pt;
+    color: #0A0A0A;
+    margin-bottom: 5px;
+  }
+  .cover .subtitle {
+    font-size: 14pt;
+    color: #C6A962;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+  .cover .doc-title {
+    font-size: 18pt;
+    font-weight: 600;
+    color: #333;
+    padding: 15px 40px;
+    border: 2px solid #C6A962;
+    border-radius: 8px;
+    margin-bottom: 50px;
+  }
+  .cover .meta {
+    font-size: 10pt;
+    color: #888;
+    line-height: 2;
+  }
+  .cover .meta strong { color: #555; }
+
+  /* Table of Contents */
+  .toc { page-break-after: always; }
+  .toc h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22pt; color: #0A0A0A;
+    border-bottom: 3px solid #C6A962;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+  }
+  .toc-list { list-style: none; }
+  .toc-list li {
+    padding: 10px 0;
+    border-bottom: 1px dotted #ddd;
+    display: flex;
+    justify-content: space-between;
+    font-size: 11pt;
+  }
+  .toc-list li .num { color: #C6A962; font-weight: 600; margin-right: 12px; }
+  .toc-list li .title { flex: 1; }
+  .toc-list li .page { color: #999; }
+
+  /* Section Headers */
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20pt;
+    color: #0A0A0A;
+    border-bottom: 3px solid #C6A962;
+    padding-bottom: 8px;
+    margin: 35px 0 20px 0;
+    page-break-after: avoid;
+  }
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 14pt;
+    color: #333;
+    margin: 22px 0 10px 0;
+    padding-left: 12px;
+    border-left: 4px solid #C6A962;
+    page-break-after: avoid;
+  }
+  h4 {
+    font-size: 11pt;
+    font-weight: 600;
+    color: #555;
+    margin: 15px 0 6px 0;
+  }
+
+  p { margin-bottom: 10px; }
+
+  /* Feature Cards */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 15px 0;
+  }
+  .feature-card {
+    border: 1px solid #e8e0d0;
+    border-radius: 8px;
+    padding: 14px;
+    background: #fdfcf9;
+  }
+  .feature-card .icon { font-size: 20pt; margin-bottom: 6px; }
+  .feature-card .title { font-weight: 600; font-size: 10.5pt; color: #333; margin-bottom: 4px; }
+  .feature-card .desc { font-size: 9.5pt; color: #666; line-height: 1.5; }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 10pt;
+  }
+  th {
+    background: linear-gradient(135deg, #A8893D, #C6A962);
+    color: #fff;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 9.5pt;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #eee;
+  }
+  tr:nth-child(even) { background: #faf9f6; }
+
+  /* Badges */
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 8.5pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .badge-user { background: #E8F5E9; color: #2E7D32; }
+  .badge-owner { background: #FFF3E0; color: #E65100; }
+  .badge-both { background: #E3F2FD; color: #1565C0; }
+  .badge-auto { background: #F3E5F5; color: #7B1FA2; }
+
+  /* Flow Diagrams */
+  .flow {
+    background: #faf9f6;
+    border: 1px solid #e8e0d0;
+    border-radius: 8px;
+    padding: 18px;
+    margin: 15px 0;
+    text-align: center;
+  }
+  .flow-step {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 9.5pt;
+    font-weight: 500;
+    margin: 3px;
+  }
+  .flow-arrow {
+    display: inline-block;
+    color: #C6A962;
+    font-size: 14pt;
+    font-weight: bold;
+    margin: 0 4px;
+    vertical-align: middle;
+  }
+  .flow-user { background: #E8F5E9; color: #2E7D32; }
+  .flow-system { background: #F3E5F5; color: #7B1FA2; }
+  .flow-owner { background: #FFF3E0; color: #E65100; }
+
+  /* Lists */
+  ul { margin: 8px 0 12px 22px; }
+  li { margin-bottom: 5px; }
+
+  /* Highlight box */
+  .highlight {
+    background: linear-gradient(135deg, #fdf8ec, #faf5e4);
+    border-left: 4px solid #C6A962;
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 15px 0;
+    font-size: 10pt;
+  }
+  .highlight strong { color: #A8893D; }
+
+  /* Page break */
+  .page-break { page-break-before: always; }
+
+  /* Footer */
+  .doc-footer {
+    margin-top: 50px;
+    padding-top: 15px;
+    border-top: 2px solid #C6A962;
+    text-align: center;
+    font-size: 9pt;
+    color: #999;
+  }
+
+  /* Tech Stack */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 15px 0;
+  }
+  .tech-item {
+    text-align: center;
+    padding: 12px;
+    border: 1px solid #e8e0d0;
+    border-radius: 8px;
+    background: #fdfcf9;
+  }
+  .tech-item .name { font-weight: 600; font-size: 10pt; color: #333; }
+  .tech-item .role { font-size: 8.5pt; color: #888; margin-top: 3px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ COVER PAGE ═══════════════════════════════ -->
+<div class="cover">
+  <div class="cover-logo"><span>B</span></div>
+  <h1>Boho Cafe & Lounge</h1>
+  <div class="subtitle">Kanpur</div>
+  <div class="doc-title">📋 Complete Feature Documentation</div>
+  <div class="meta">
+    <strong>Document Type:</strong> Website Feature Guide & Functional Specification<br>
+    <strong>Version:</strong> 2.0 — Table Management System<br>
+    <strong>Date:</strong> June 2026<br>
+    <strong>Website:</strong> bohocafekanpur.com<br>
+    <strong>Address:</strong> 3rd Floor, 7/150 A-2, Swaroop Nagar, Kanpur, UP 208002<br>
+    <strong>Contact:</strong> +91 84006 78200
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ TABLE OF CONTENTS ═══════════════════════════════ -->
+<div class="toc">
+  <h2>Table of Contents</h2>
+  <ol class="toc-list">
+    <li><span class="num">01</span><span class="title">Website Overview</span></li>
+    <li><span class="num">02</span><span class="title">Customer Features (Public Website)</span></li>
+    <li><span class="num">03</span><span class="title">Reservation System — Customer Flow</span></li>
+    <li><span class="num">04</span><span class="title">Reservation System — Owner/Admin Flow</span></li>
+    <li><span class="num">05</span><span class="title">Table Management System</span></li>
+    <li><span class="num">06</span><span class="title">Email Notification System</span></li>
+    <li><span class="num">07</span><span class="title">Admin Dashboard Features</span></li>
+    <li><span class="num">08</span><span class="title">Reservation Status Tracking</span></li>
+    <li><span class="num">09</span><span class="title">API Endpoints Reference</span></li>
+    <li><span class="num">10</span><span class="title">Security & Data Protection</span></li>
+    <li><span class="num">11</span><span class="title">Technology Stack</span></li>
+    <li><span class="num">12</span><span class="title">Feature Summary Matrix</span></li>
+  </ol>
+</div>
+
+<!-- ═══════════════════════════════ SECTION 1 ═══════════════════════════════ -->
+<h2>1. Website Overview</h2>
+
+<p>Boho Cafe & Lounge is a premium single-page restaurant website with a fully integrated digital reservation and table management system. The website serves two audiences:</p>
+
+<div class="feature-grid">
+  <div class="feature-card">
+    <div class="icon">👤</div>
+    <div class="title">For Customers</div>
+    <div class="desc">Browse the cafe, view menu, explore gallery, check events, make table reservations with live availability, and track booking status — all from one beautiful interface.</div>
+  </div>
+  <div class="feature-card">
+    <div class="icon">👑</div>
+    <div class="title">For Owner / Admin</div>
+    <div class="desc">Manage all reservations, approve/reject with table assignment, view daily timeline, search/filter bookings, receive email alerts, and track cafe occupancy in real-time.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ SECTION 2 ═══════════════════════════════ -->
+<h2>2. Customer Features (Public Website)</h2>
+
+<h3>2.1 Hero Section</h3>
+<ul>
+  <li>Full-screen video background showcasing the cafe ambiance</li>
+  <li>Animated text with cafe name and tagline</li>
+  <li>Call-to-action buttons: "Reserve a Table" and "Explore Menu"</li>
+  <li>Parallax scrolling effect for premium feel</li>
+  <li>Bokeh light particle animations</li>
+</ul>
+
+<h3>2.2 About Section</h3>
+<ul>
+  <li>Cafe story and brand description</li>
+  <li>Key highlights with animated counters</li>
+  <li>Visual imagery of the cafe interior</li>
+</ul>
+
+<h3>2.3 Menu Section</h3>
+<ul>
+  <li>Categorized food and beverage menu display</li>
+  <li>Category filter tabs (All, Starters, Main Course, Beverages, Desserts, etc.)</li>
+  <li>Item names, descriptions, and pricing</li>
+  <li>Beautiful card-based layout with hover animations</li>
+</ul>
+
+<h3>2.4 Gallery Section</h3>
+<ul>
+  <li>Photo gallery showcasing cafe interiors, food, and events</li>
+  <li>Lightbox modal for full-screen image viewing</li>
+  <li>Grid layout with hover effects</li>
+  <li>Lazy loading for performance optimization</li>
+</ul>
+
+<h3>2.5 Events Section</h3>
+<ul>
+  <li>Upcoming events and special occasions display</li>
+  <li>Event dates, descriptions, and highlights</li>
+  <li>Visual cards with event imagery</li>
+</ul>
+
+<h3>2.6 Testimonials Section</h3>
+<ul>
+  <li>Customer reviews and feedback carousel</li>
+  <li>Star ratings and customer names</li>
+  <li>Auto-rotating testimonial slider</li>
+</ul>
+
+<h3>2.7 Contact Section</h3>
+<ul>
+  <li><strong>Address Card</strong> — Full address with Google Maps link</li>
+  <li><strong>Phone Card</strong> — Click-to-call functionality</li>
+  <li><strong>Email Card</strong> — Click-to-email functionality</li>
+  <li><strong>Operating Hours</strong> — Mon–Sun: 12:00 PM – 12:00 AM</li>
+  <li><strong>Embedded Google Map</strong> — Interactive map with exact cafe location</li>
+  <li><strong>Get Directions</strong> — Opens Google Maps navigation</li>
+  <li><strong>WhatsApp Button</strong> — Direct chat with pre-filled message</li>
+  <li><strong>Social Media Links</strong> — Instagram, Facebook, YouTube</li>
+</ul>
+
+<h3>2.8 Navigation & UI</h3>
+<ul>
+  <li>Sticky transparent navbar with glassmorphism on scroll</li>
+  <li>Smooth scroll navigation to all sections</li>
+  <li>Active section highlighting in navbar</li>
+  <li>Mobile responsive hamburger menu with slide-in panel</li>
+  <li>Floating "Book a Table" button visible while scrolling</li>
+  <li>Premium loading screen on initial page load</li>
+  <li>Scroll-to-top button</li>
+</ul>
+
+<h3>2.9 Footer</h3>
+<ul>
+  <li>Quick links to all sections</li>
+  <li>Newsletter subscription form</li>
+  <li>Contact details and social media links</li>
+  <li>Copyright and branding</li>
+</ul>
+
+<!-- ═══════════════════════════════ SECTION 3 ═══════════════════════════════ -->
+<div class="page-break"></div>
+<h2>3. Reservation System — Customer Flow</h2>
+
+<div class="highlight">
+  <strong>Key Feature:</strong> Customers can book specific tables with live availability checking, preventing double-bookings and conflicts. The system supports individual table bookings, full cafe reservations, and event bookings.
+</div>
+
+<h3>3.1 Booking Types</h3>
+<table>
+  <tr><th>Type</th><th>Description</th><th>Use Case</th></tr>
+  <tr><td>🪑 <strong>Table Booking</strong></td><td>Reserve a specific table (1–10) for a time range</td><td>Regular dining, date nights, small groups</td></tr>
+  <tr><td>🏠 <strong>Full Cafe</strong></td><td>Reserve the entire cafe for exclusive use</td><td>Private parties, corporate events</td></tr>
+  <tr><td>🎉 <strong>Event Booking</strong></td><td>Reserve for a special event or celebration</td><td>Birthdays, anniversaries, launches</td></tr>
+</table>
+
+<h3>3.2 Reservation Form Fields</h3>
+<table>
+  <tr><th>Field</th><th>Type</th><th>Required</th><th>Details</th></tr>
+  <tr><td>Booking Type</td><td>Selector (3 options)</td><td>Yes</td><td>Table / Full Cafe / Event</td></tr>
+  <tr><td>Date</td><td>Date picker</td><td>Yes</td><td>Today onwards, no past dates</td></tr>
+  <tr><td>Start Time</td><td>Dropdown</td><td>Yes</td><td>12:00 PM to 11:00 PM (hourly)</td></tr>
+  <tr><td>End Time</td><td>Dropdown</td><td>Yes</td><td>Only shows times after start time</td></tr>
+  <tr><td>Full Name</td><td>Text</td><td>Yes</td><td>Customer's full name</td></tr>
+  <tr><td>Phone</td><td>Text</td><td>Yes</td><td>Contact number</td></tr>
+  <tr><td>Email</td><td>Email</td><td>Yes</td><td>For confirmation emails</td></tr>
+  <tr><td>Guests</td><td>Dropdown</td><td>Yes</td><td>1–20 guests</td></tr>
+  <tr><td>Occasion</td><td>Dropdown</td><td>No</td><td>Casual, Birthday, Anniversary, Date Night, Business, Other</td></tr>
+  <tr><td>Special Requests</td><td>Textarea</td><td>No</td><td>Dietary needs, decorations, etc.</td></tr>
+  <tr><td>Table Selection</td><td>Click-to-select</td><td>Yes*</td><td>*Required for Table Booking type</td></tr>
+</table>
+
+<h3>3.3 Live Table Availability</h3>
+<p>When a customer selects a date, start time, and end time, the system automatically checks the database and displays:</p>
+<ul>
+  <li><strong>✅ Available Tables</strong> — Shown in green, clickable to select</li>
+  <li><strong>❌ Unavailable Tables</strong> — Shown in red with reason ("Reserved by Guest")</li>
+  <li><strong>⏳ Pending Tables</strong> — Tables with pending requests (shown as warning)</li>
+  <li><strong>Full Cafe Block</strong> — If the entire cafe is reserved, all tables show as blocked</li>
+</ul>
+
+<h3>3.4 Customer Reservation Flow</h3>
+<div class="flow">
+  <span class="flow-step flow-user">Customer Opens Website</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step flow-user">Clicks "Book a Table"</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step flow-user">Selects Booking Type</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step flow-user">Picks Date & Time Range</span>
+  <br><br>
+  <span class="flow-step flow-system">System Checks Availability</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step flow-user">Selects Available Table</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step flow-user">Fills Details & Submits</span>
+  <br><br>
+  <span class="flow-step flow-system">System Validates & Saves</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step flow-system">Emails Sent (Owner + Customer)</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step flow-user">Gets Reservation ID</span>
+</div>
+
+<h3>3.5 After Submission</h3>
+<ul>
+  <li>Success screen with animated confirmation</li>
+  <li>Unique Reservation ID displayed with copy-to-clipboard button</li>
+  <li>"Track Status" button linking to status page</li>
+  <li>"Book Another" button to reset the form</li>
+</ul>
+
+<!-- ═══════════════════════════════ SECTION 4 ═══════════════════════════════ -->
+<div class="page-break"></div>
+<h2>4. Reservation System — Owner/Admin Flow</h2>
+
+<h3>4.1 How the Owner Gets Notified</h3>
+<p>When a customer submits a reservation, the owner immediately receives an email with:</p>
+<ul>
+  <li>Customer name, phone, email</li>
+  <li>Booking type (Table / Full Cafe / Event)</li>
+  <li>Date, time range, guest count, occasion</li>
+  <li>Special requests (if any)</li>
+  <li>One-click <strong>✅ APPROVE</strong> and <strong>❌ REJECT</strong> buttons</li>
+</ul>
+
+<h3>4.2 One-Click Email Approval</h3>
+<div class="flow">
+  <span class="flow-step flow-system">Email Arrives</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step flow-owner">Owner Clicks APPROVE</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step flow-system">Status → CONFIRMED</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step flow-system">Customer Gets Confirmation Email</span>
+</div>
+<br>
+<div class="flow">
+  <span class="flow-step flow-system">Email Arrives</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step flow-owner">Owner Clicks REJECT</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step flow-system">Status → REJECTED</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step flow-system">Customer Gets Rejection Email</span>
+</div>
+
+<h3>4.3 Admin Dashboard Approval (with Table Assignment)</h3>
+<div class="flow">
+  <span class="flow-step flow-owner">Opens Admin Dashboard</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step flow-owner">Clicks "Approve"</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step flow-system">Table Selection Modal Opens</span>
+  <br><br>
+  <span class="flow-step flow-system">Shows Available/Occupied Tables</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step flow-owner">Selects Table Number</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step flow-system">Confirms & Sends Email</span>
+</div>
+
+<!-- ═══════════════════════════════ SECTION 5 ═══════════════════════════════ -->
+<div class="page-break"></div>
+<h2>5. Table Management System</h2>
+
+<h3>5.1 Restaurant Configuration</h3>
+<table>
+  <tr><th>Table</th><th>Capacity</th><th>Type</th></tr>
+  <tr><td>Table 1</td><td>2 seats</td><td>Intimate / Couple</td></tr>
+  <tr><td>Table 2</td><td>2 seats</td><td>Intimate / Couple</td></tr>
+  <tr><td>Table 3</td><td>4 seats</td><td>Small Group</td></tr>
+  <tr><td>Table 4</td><td>4 seats</td><td>Small Group</td></tr>
+  <tr><td>Table 5</td><td>6 seats</td><td>Medium Group</td></tr>
+  <tr><td>Table 6</td><td>6 seats</td><td>Medium Group</td></tr>
+  <tr><td>Table 7</td><td>8 seats</td><td>Large Group</td></tr>
+  <tr><td>Table 8</td><td>8 seats</td><td>Large Group</td></tr>
+  <tr><td>Table 9</td><td>10 seats</td><td>Party / Event</td></tr>
+  <tr><td>Table 10</td><td>12 seats</td><td>Large Party</td></tr>
+</table>
+
+<h3>5.2 Conflict Detection Rules</h3>
+<ul>
+  <li><strong>Table Overlap:</strong> If Table 3 is confirmed for 2:00 PM – 5:00 PM, no one else can book Table 3 during any overlapping time range.</li>
+  <li><strong>Full Cafe Block:</strong> If the full cafe is confirmed for 6:00 PM – 10:00 PM, ALL tables are blocked during that time.</li>
+  <li><strong>Full Cafe Request vs Existing Tables:</strong> If any table has a confirmed reservation, full cafe booking is rejected for that time.</li>
+  <li><strong>Time Overlap Logic:</strong> Start1 < End2 AND Start2 < End1 (standard interval overlap check).</li>
+</ul>
+
+<h3>5.3 Operating Hours</h3>
+<p>The system supports 12 one-hour time slots: <strong>12:00 PM to 11:00 PM</strong>. Customers can book any range within these hours (e.g., 2:00 PM – 6:00 PM for a 4-hour reservation).</p>
+
+<!-- ═══════════════════════════════ SECTION 6 ═══════════════════════════════ -->
+<h2>6. Email Notification System</h2>
+
+<p>The system sends 4 types of automated emails via <strong>Resend API</strong>:</p>
+
+<table>
+  <tr><th>#</th><th>Email Type</th><th>Recipient</th><th>Trigger</th><th>Contents</th></tr>
+  <tr>
+    <td>1</td>
+    <td><strong>New Reservation Alert</strong></td>
+    <td>Owner</td>
+    <td>Customer submits reservation</td>
+    <td>Full details + APPROVE/REJECT buttons</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td><strong>Booking Received</strong></td>
+    <td>Customer</td>
+    <td>Customer submits reservation</td>
+    <td>Reservation details + ID + Track Status link</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td><strong>Booking Confirmed</strong></td>
+    <td>Customer</td>
+    <td>Owner approves reservation</td>
+    <td>Confirmation + Assigned table number + Date/Time</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td><strong>Booking Rejected</strong></td>
+    <td>Customer</td>
+    <td>Owner rejects reservation</td>
+    <td>Rejection notice + WhatsApp contact link</td>
+  </tr>
+</table>
+
+<p>All emails feature the Boho Cafe branding with dark theme, gold accents, and responsive HTML design.</p>
+
+<!-- ═══════════════════════════════ SECTION 7 ═══════════════════════════════ -->
+<div class="page-break"></div>
+<h2>7. Admin Dashboard Features</h2>
+
+<div class="highlight">
+  <strong>Access:</strong> /admin — Password protected with session-based authentication.
+</div>
+
+<h3>7.1 Dashboard Statistics</h3>
+<p>Four live counters at the top showing:</p>
+<div class="feature-grid">
+  <div class="feature-card">
+    <div class="title">📊 Total Reservations</div>
+    <div class="desc">All-time count of all reservation requests.</div>
+  </div>
+  <div class="feature-card">
+    <div class="title">⏳ Pending</div>
+    <div class="desc">Reservations awaiting owner approval.</div>
+  </div>
+  <div class="feature-card">
+    <div class="title">✅ Confirmed</div>
+    <div class="desc">Approved reservations with assigned tables.</div>
+  </div>
+  <div class="feature-card">
+    <div class="title">❌ Rejected</div>
+    <div class="desc">Declined reservation requests.</div>
+  </div>
+</div>
+
+<h3>7.2 List View</h3>
+<ul>
+  <li><strong>Filter Tabs:</strong> All / Pending / Confirmed / Rejected</li>
+  <li><strong>Search Bar:</strong> Search by customer name, email, or phone</li>
+  <li><strong>Reservation Cards</strong> showing: Name, status badge, booking type, phone, email, date, time range, guest count, occasion, reservation ID, special requests, submission timestamp</li>
+  <li><strong>Approve Button:</strong> Opens table assignment modal (for pending reservations)</li>
+  <li><strong>Reject Button:</strong> Immediately rejects with email notification</li>
+  <li><strong>Assign Table Button:</strong> For confirmed reservations without a table assignment</li>
+</ul>
+
+<h3>7.3 Timeline View</h3>
+<ul>
+  <li><strong>10 × 12 Grid:</strong> 10 tables (rows) × 12 time slots (columns: 12 PM – 11 PM)</li>
+  <li><strong>Date Navigation:</strong> Previous/Next day buttons + date picker</li>
+  <li><strong>Color-Coded Cells:</strong>
+    <ul>
+      <li><span style="color: #34D399;">Green</span> — Confirmed reservation (shows customer first name)</li>
+      <li><span style="color: #FBBF24;">Amber</span> — Pending reservation</li>
+      <li><span style="color: #6B5F4F;">Gray</span> — Free / Available</li>
+    </ul>
+  </li>
+  <li><strong>Hover Tooltip:</strong> Shows full customer name, guest count, time range, status</li>
+  <li><strong>Refresh Button:</strong> Manually reload timeline data</li>
+  <li><strong>Unassigned Section:</strong> Lists confirmed reservations without table assignments</li>
+</ul>
+
+<h3>7.4 Table Assignment Modal</h3>
+<ul>
+  <li>Shows customer name, guest count, date, and time range</li>
+  <li>10 table buttons in a grid layout</li>
+  <li><strong>Available tables</strong> — Clickable, shows "Free"</li>
+  <li><strong>Occupied tables</strong> — Disabled, red, shows "Busy" (based on time overlap)</li>
+  <li>Error message if attempting to assign a busy table</li>
+  <li>Confirm button to finalize assignment</li>
+</ul>
+
+<!-- ═══════════════════════════════ SECTION 8 ═══════════════════════════════ -->
+<h2>8. Reservation Status Tracking</h2>
+
+<div class="highlight">
+  <strong>Access:</strong> /reservation/status — Public page, no login required.
+</div>
+
+<h3>8.1 How Customers Track Their Booking</h3>
+<ul>
+  <li>Enter Reservation ID + Email address</li>
+  <li>System verifies and displays current status</li>
+  <li>Status displayed with visual indicators:
+    <ul>
+      <li><span style="color: #FBBF24;">⏳ PENDING</span> — Awaiting owner confirmation</li>
+      <li><span style="color: #34D399;">✅ CONFIRMED</span> — Booking approved, table assigned</li>
+      <li><span style="color: #F87171;">❌ REJECTED</span> — Booking declined</li>
+    </ul>
+  </li>
+  <li>Full reservation details shown: date, time, guests, table number, occasion</li>
+  <li>Direct link provided in confirmation email (auto-fills ID and email)</li>
+</ul>
+
+<!-- ═══════════════════════════════ SECTION 9 ═══════════════════════════════ -->
+<div class="page-break"></div>
+<h2>9. API Endpoints Reference</h2>
+
+<table>
+  <tr><th>Method</th><th>Endpoint</th><th>Description</th><th>Auth</th></tr>
+  <tr><td>POST</td><td>/api/reservation</td><td>Create new reservation</td><td>Public</td></tr>
+  <tr><td>GET</td><td>/api/reservation/availability</td><td>Check table availability for date + time</td><td>Public</td></tr>
+  <tr><td>GET</td><td>/api/reservation/status</td><td>Get reservation status by ID + email</td><td>Public</td></tr>
+  <tr><td>GET</td><td>/api/reservation/action</td><td>One-click approve/reject via email link</td><td>Token</td></tr>
+  <tr><td>GET</td><td>/api/admin/reservations</td><td>List all reservations (with counts)</td><td>Admin</td></tr>
+  <tr><td>GET</td><td>/api/admin/reservations?view=timeline</td><td>Get reservations for timeline view</td><td>Admin</td></tr>
+  <tr><td>PATCH</td><td>/api/admin/reservations</td><td>Approve/Reject/Assign table</td><td>Admin</td></tr>
+  <tr><td>POST</td><td>/api/contact</td><td>Contact form submission</td><td>Public</td></tr>
+  <tr><td>POST</td><td>/api/newsletter</td><td>Newsletter subscription</td><td>Public</td></tr>
+</table>
+
+<!-- ═══════════════════════════════ SECTION 10 ═══════════════════════════════ -->
+<h2>10. Security & Data Protection</h2>
+
+<table>
+  <tr><th>Feature</th><th>Implementation</th></tr>
+  <tr><td>Admin Authentication</td><td>Password-based with Bearer token, session storage</td></tr>
+  <tr><td>Row Level Security (RLS)</td><td>Supabase RLS policies — public can INSERT and SELECT only</td></tr>
+  <tr><td>Service Role Key</td><td>Server-side API routes use service_role key (bypasses RLS for admin operations)</td></tr>
+  <tr><td>Email Action Tokens</td><td>Unique tokens for approve/reject links to prevent unauthorized access</td></tr>
+  <tr><td>Rate Limiting</td><td>Max 5 reservations per IP per 10 minutes</td></tr>
+  <tr><td>Spam Protection</td><td>Honeypot field (_gotcha) to catch bots</td></tr>
+  <tr><td>Input Validation</td><td>Server-side validation of all fields (name, email, phone, date, time)</td></tr>
+  <tr><td>Environment Variables</td><td>All secrets stored in .env.local (never exposed to client)</td></tr>
+</table>
+
+<!-- ═══════════════════════════════ SECTION 11 ═══════════════════════════════ -->
+<h2>11. Technology Stack</h2>
+
+<div class="tech-grid">
+  <div class="tech-item">
+    <div class="name">Next.js 16</div>
+    <div class="role">Framework</div>
+  </div>
+  <div class="tech-item">
+    <div class="name">React 19</div>
+    <div class="role">UI Library</div>
+  </div>
+  <div class="tech-item">
+    <div class="name">TypeScript</div>
+    <div class="role">Type Safety</div>
+  </div>
+  <div class="tech-item">
+    <div class="name">Supabase</div>
+    <div class="role">Database (PostgreSQL)</div>
+  </div>
+  <div class="tech-item">
+    <div class="name">Resend</div>
+    <div class="role">Email Service</div>
+  </div>
+  <div class="tech-item">
+    <div class="name">Framer Motion</div>
+    <div class="role">Animations</div>
+  </div>
+  <div class="tech-item">
+    <div class="name">Lucide Icons</div>
+    <div class="role">Icon Library</div>
+  </div>
+  <div class="tech-item">
+    <div class="name">CSS Variables</div>
+    <div class="role">Design System</div>
+  </div>
+  <div class="tech-item">
+    <div class="name">Vercel</div>
+    <div class="role">Deployment</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ SECTION 12 ═══════════════════════════════ -->
+<div class="page-break"></div>
+<h2>12. Complete Feature Summary Matrix</h2>
+
+<table>
+  <tr><th>#</th><th>Feature</th><th>User</th><th>Description</th></tr>
+  <tr><td>1</td><td>Hero Video Background</td><td><span class="badge badge-user">Customer</span></td><td>Immersive landing with video, parallax, and CTA buttons</td></tr>
+  <tr><td>2</td><td>About Section</td><td><span class="badge badge-user">Customer</span></td><td>Brand story and cafe highlights</td></tr>
+  <tr><td>3</td><td>Menu Display</td><td><span class="badge badge-user">Customer</span></td><td>Categorized menu with prices and filtering</td></tr>
+  <tr><td>4</td><td>Photo Gallery</td><td><span class="badge badge-user">Customer</span></td><td>Grid gallery with lightbox viewer</td></tr>
+  <tr><td>5</td><td>Events Listing</td><td><span class="badge badge-user">Customer</span></td><td>Upcoming events and special occasions</td></tr>
+  <tr><td>6</td><td>Customer Testimonials</td><td><span class="badge badge-user">Customer</span></td><td>Review carousel with ratings</td></tr>
+  <tr><td>7</td><td>Google Maps Integration</td><td><span class="badge badge-user">Customer</span></td><td>Embedded map + Get Directions link</td></tr>
+  <tr><td>8</td><td>WhatsApp Chat</td><td><span class="badge badge-user">Customer</span></td><td>One-click WhatsApp with pre-filled message</td></tr>
+  <tr><td>9</td><td>Click-to-Call</td><td><span class="badge badge-user">Customer</span></td><td>Direct phone call from website</td></tr>
+  <tr><td>10</td><td>Newsletter Subscription</td><td><span class="badge badge-user">Customer</span></td><td>Email signup for updates</td></tr>
+  <tr><td>11</td><td>Table Reservation Form</td><td><span class="badge badge-user">Customer</span></td><td>Date, time range, table selection, guest details</td></tr>
+  <tr><td>12</td><td>Live Table Availability</td><td><span class="badge badge-user">Customer</span></td><td>Real-time available/unavailable table display</td></tr>
+  <tr><td>13</td><td>Booking Type Selection</td><td><span class="badge badge-user">Customer</span></td><td>Table / Full Cafe / Event booking options</td></tr>
+  <tr><td>14</td><td>Conflict Prevention</td><td><span class="badge badge-auto">Automatic</span></td><td>Prevents double-booking of tables and time slots</td></tr>
+  <tr><td>15</td><td>Reservation Status Tracking</td><td><span class="badge badge-user">Customer</span></td><td>Track booking by ID + email on /reservation/status</td></tr>
+  <tr><td>16</td><td>Reservation ID Copy</td><td><span class="badge badge-user">Customer</span></td><td>One-click copy of reservation ID</td></tr>
+  <tr><td>17</td><td>New Booking Email Alert</td><td><span class="badge badge-owner">Owner</span></td><td>Instant email with customer details + approve/reject</td></tr>
+  <tr><td>18</td><td>One-Click Email Approval</td><td><span class="badge badge-owner">Owner</span></td><td>Approve/reject directly from email</td></tr>
+  <tr><td>19</td><td>Customer Confirmation Email</td><td><span class="badge badge-auto">Automatic</span></td><td>Auto-sent on approval with table number</td></tr>
+  <tr><td>20</td><td>Customer Rejection Email</td><td><span class="badge badge-auto">Automatic</span></td><td>Auto-sent on rejection with WhatsApp link</td></tr>
+  <tr><td>21</td><td>Admin Dashboard Login</td><td><span class="badge badge-owner">Owner</span></td><td>Password-protected admin access</td></tr>
+  <tr><td>22</td><td>Reservation Statistics</td><td><span class="badge badge-owner">Owner</span></td><td>Live counters: Total, Pending, Confirmed, Rejected</td></tr>
+  <tr><td>23</td><td>Reservation List View</td><td><span class="badge badge-owner">Owner</span></td><td>Filterable, searchable list of all reservations</td></tr>
+  <tr><td>24</td><td>Table Assignment Modal</td><td><span class="badge badge-owner">Owner</span></td><td>Assign table with occupied-table detection</td></tr>
+  <tr><td>25</td><td>Timeline View</td><td><span class="badge badge-owner">Owner</span></td><td>10×12 grid: Tables vs Time Slots per day</td></tr>
+  <tr><td>26</td><td>Unassigned Reservations</td><td><span class="badge badge-owner">Owner</span></td><td>Warning section for confirmed bookings without tables</td></tr>
+  <tr><td>27</td><td>Search & Filter</td><td><span class="badge badge-owner">Owner</span></td><td>Search by name/email/phone, filter by status</td></tr>
+  <tr><td>28</td><td>Rate Limiting</td><td><span class="badge badge-auto">Automatic</span></td><td>5 reservations per IP per 10 minutes</td></tr>
+  <tr><td>29</td><td>Spam Protection</td><td><span class="badge badge-auto">Automatic</span></td><td>Honeypot field to prevent bot submissions</td></tr>
+  <tr><td>30</td><td>Responsive Design</td><td><span class="badge badge-both">Both</span></td><td>Fully mobile-responsive on all devices</td></tr>
+  <tr><td>31</td><td>Smooth Animations</td><td><span class="badge badge-both">Both</span></td><td>Scroll animations, hover effects, micro-interactions</td></tr>
+  <tr><td>32</td><td>SEO Optimized</td><td><span class="badge badge-auto">Automatic</span></td><td>Meta tags, semantic HTML, proper heading hierarchy</td></tr>
+</table>
+
+<div class="doc-footer">
+  <p><strong>Boho Cafe & Lounge</strong> — Premium Digital Experience</p>
+  <p>3rd Floor, 7/150 A-2, Opp. Concord Apartment, Khalasi Line, Swaroop Nagar, Kanpur, UP 208002</p>
+  <p>📞 +91 84006 78200 · 📧 hs142636@gmail.com</p>
+  <p style="margin-top: 10px; color: #bbb;">Document generated June 2026 · Version 2.0</p>
+</div>
+
+</body>
+</html>
