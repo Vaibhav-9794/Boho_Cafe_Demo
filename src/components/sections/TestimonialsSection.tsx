@@ -141,7 +141,7 @@ export default function TestimonialsSection() {
           <button
             onClick={goToPrev}
             aria-label="Previous testimonial"
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-5 z-20 glass rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-[var(--color-text-secondary)] hover:text-[var(--color-gold)] hover:border-[var(--color-gold)] transition-all duration-300 cursor-pointer"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-5 z-20 glass rounded-full w-10 h-10 sm:w-12 sm:h-12 hidden sm:flex items-center justify-center text-[var(--color-text-secondary)] hover:text-[var(--color-gold)] hover:border-[var(--color-gold)] transition-all duration-300 cursor-pointer"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
@@ -149,7 +149,7 @@ export default function TestimonialsSection() {
           <button
             onClick={goToNext}
             aria-label="Next testimonial"
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-5 z-20 glass rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-[var(--color-text-secondary)] hover:text-[var(--color-gold)] hover:border-[var(--color-gold)] transition-all duration-300 cursor-pointer"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-5 z-20 glass rounded-full w-10 h-10 sm:w-12 sm:h-12 hidden sm:flex items-center justify-center text-[var(--color-text-secondary)] hover:text-[var(--color-gold)] hover:border-[var(--color-gold)] transition-all duration-300 cursor-pointer"
           >
             <ChevronRight className="w-5 h-5" />
           </button>

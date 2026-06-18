@@ -10,7 +10,7 @@ export default function EventsSection() {
   return (
     <section
       id="events"
-      className="relative py-[var(--section-padding)] bg-[var(--color-dark)]"
+      className="relative py-[var(--section-padding)] bg-[var(--color-dark)] overflow-hidden"
     >
       {/* Subtle ambient glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[var(--color-gold)] rounded-full opacity-[0.02] blur-[150px] pointer-events-none" />

@@ -104,7 +104,7 @@ export default function AboutSection() {
             className="relative"
           >
             {/* Decorative Frame */}
-            <div className="absolute -top-4 -right-4 w-full h-full border border-[var(--color-gold)]/20 rounded-lg z-0" />
+            <div className="absolute -top-4 -right-4 w-full h-full border border-[var(--color-gold)]/20 rounded-lg z-0 hidden sm:block" />
             <div className="relative z-10 overflow-hidden rounded-lg">
               <img
                 src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80"
@@ -122,7 +122,7 @@ export default function AboutSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className="absolute -bottom-6 -left-6 z-20 glass rounded-lg p-4 sm:p-5"
+              className="absolute -bottom-6 left-2 sm:-left-6 z-20 glass rounded-lg p-4 sm:p-5"
             >
               <p className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl font-bold text-gradient-gold">
                 Est. 2020

@@ -21,7 +21,7 @@ export default function Home() {
     <>
       <LoadingScreen />
       <Navbar />
-      <main>
+      <main className="overflow-x-hidden">
         <HeroSection />
         <AboutSection />
         <MenuSection />

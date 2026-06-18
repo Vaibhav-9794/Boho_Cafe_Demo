@@ -19,7 +19,7 @@ export const fadeInDown: Variants = {
 };
 
 export const fadeInLeft: Variants = {
-  hidden: { opacity: 0, x: -60 },
+  hidden: { opacity: 0, x: -30 },
   visible: {
     opacity: 1,
     x: 0,
@@ -28,7 +28,7 @@ export const fadeInLeft: Variants = {
 };
 
 export const fadeInRight: Variants = {
-  hidden: { opacity: 0, x: 60 },
+  hidden: { opacity: 0, x: 30 },
   visible: {
     opacity: 1,
     x: 0,
@@ -91,8 +91,8 @@ export const slideIn = (direction: "left" | "right" | "up" | "down", delay: numb
   return {
     hidden: {
       opacity: 0,
-      x: direction === "left" ? -100 : direction === "right" ? 100 : 0,
-      y: direction === "up" ? -100 : direction === "down" ? 100 : 0,
+      x: direction === "left" ? -40 : direction === "right" ? 40 : 0,
+      y: direction === "up" ? -40 : direction === "down" ? 40 : 0,
     },
     visible: {
       opacity: 1,

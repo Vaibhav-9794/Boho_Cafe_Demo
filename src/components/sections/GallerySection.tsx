@@ -154,7 +154,7 @@ export default function GallerySection() {
   return (
     <section
       id="gallery"
-      className="relative py-[var(--section-padding)] bg-[var(--color-dark)]"
+      className="relative py-[var(--section-padding)] bg-[var(--color-dark)] overflow-hidden"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}

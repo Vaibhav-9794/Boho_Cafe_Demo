@@ -359,7 +359,7 @@ export default function ReservationSection() {
   }, [isLargeGroup, availabilityChecked, tables, form.guests]);
 
   return (
-    <section id="reservation" className="relative py-[var(--section-padding)] bg-[var(--color-dark)]">
+    <section id="reservation" className="relative py-[var(--section-padding)] bg-[var(--color-dark)] overflow-hidden">
       <div className="absolute inset-0 opacity-[0.03]">
         <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle at 25% 25%, var(--color-gold) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
       </div>

@@ -56,6 +56,7 @@ html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: var(--color-gold) var(--color-dark);
+  overflow-x: hidden;
 }
 
 body {
